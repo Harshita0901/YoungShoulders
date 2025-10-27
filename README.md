@@ -1,8 +1,8 @@
 # Young Shoulders 🌙
 
-**Young Shoulders** is a Flutter app designed to support teenagers who take on heavy responsibilities at home — whether due to parents working late shifts or living with disabilities. The app helps them manage emotions, build resilience, and find community support.
+**Young Shoulders** is a Flutter app designed to support teenagers who take on heavy responsibilities at home; whether due to parents working late shifts or living with disabilities. The app helps them manage emotions, build resilience, and find community support.
 
-**This app combines a variety of mental health, productivity, and self-care tools into a single intuitive platform, providing teens with actionable ways to manage stress, track mood patterns, stay organized, and access critical resources. By integrating interactive AI chat, mood-based games, CBT techniques, breathing exercises, and personalized music recommendations, Young Shoulders empowers users to improve their mental well-being while fostering a sense of accomplishment and support. The holistic resources section ensures teens can access counseling, educational guidance, and practical life skills, making the app not just a digital tool but a tangible source of relief and growth in their daily lives.**
+**Young Shoulders is an app that helps teens manage stress, track moods, stay organized, and take care of themselves. It combines tools like AI chat, mood-based games, CBT exercises, breathing techniques, and personalized music to support mental health and build a sense of achievement. The app also offers resources for counseling, learning guidance, and life skills, making it a practical tool for daily support and personal growth.**
 
 ---
 
