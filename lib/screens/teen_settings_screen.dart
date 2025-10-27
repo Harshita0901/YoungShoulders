@@ -96,7 +96,7 @@ Your data remains secure. We do not share any personal details without consent.
 
 Developer:
 Harshita Pandey
-Developed: September 2025
+Developed: October 2025
 """),
         ),
         actions: [
@@ -307,7 +307,7 @@ Developed: September 2025
           // Developer Info
           const Center(
             child: Text(
-              "Developed by Harshita Pandey\nSeptember 2025",
+              "Developed by Harshita Pandey\nOctober 2025",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
