@@ -1,47 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import '../models/mood_data.dart';
-import '../models/mood_entry.dart';
 
 class SupporterMoodProgressScreen extends StatefulWidget {
   const SupporterMoodProgressScreen({Key? key}) : super(key: key);
 
   @override
-  _SupporterMoodProgressScreenState createState() => _SupporterMoodProgressScreenState();
+  _SupporterMoodProgressScreenState createState() =>
+      _SupporterMoodProgressScreenState();
 }
 
-class _SupporterMoodProgressScreenState extends State<SupporterMoodProgressScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _loadMoodData();
-  }
-
-  void _loadMoodData() async {
-    await MoodData().loadData();
-    setState(() {});
-  }
-
+class _SupporterMoodProgressScreenState
+    extends State<SupporterMoodProgressScreen> {
+  /// Mock mood data for the last 7 days
   List<FlSpot> _getMoodTrend() {
-    final entries = MoodData().moodEntries;
-    if (entries.isEmpty) return [];
-
-    Map<int, List<int>> dailyMoods = {};
-    DateTime now = DateTime.now();
-
-    for (var entry in entries) {
-      int dayDiff = now.difference(entry.dateTime).inDays;
-      if (dayDiff < 7) {
-        dailyMoods[6 - dayDiff] = (dailyMoods[6 - dayDiff] ?? [])..add(entry.moodLevel);
-      }
-    }
-
-    return List.generate(7, (i) {
-      if (dailyMoods[i] == null || dailyMoods[i]!.isEmpty) return FlSpot(i.toDouble(), 0);
-      double avg = dailyMoods[i]!.reduce((a, b) => a + b) / dailyMoods[i]!.length;
-      avg = avg < 0 ? 0 : avg; // clamp to 0
-      return FlSpot(i.toDouble(), avg);
-    });
+    return [
+      FlSpot(0, 5),
+      FlSpot(1, 6),
+      FlSpot(2, 4),
+      FlSpot(3, 7),
+      FlSpot(4, 6),
+      FlSpot(5, 8),
+      FlSpot(6, 7),
+    ];
   }
 
   @override
@@ -56,9 +36,7 @@ class _SupporterMoodProgressScreenState extends State<SupporterMoodProgressScree
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: moodTrend.isEmpty
-            ? const Center(child: Text("No mood data available."))
-            : Column(
+        child: Column(
           children: [
             const Align(
               alignment: Alignment.centerLeft,
@@ -81,9 +59,9 @@ class _SupporterMoodProgressScreenState extends State<SupporterMoodProgressScree
                     LineChartData(
                       minX: 0,
                       maxX: 6,
-                      minY: 0, // clamp y-axis
+                      minY: 0,
                       maxY: 10,
-                      clipData: FlClipData.all(), // prevent dips below zero
+                      clipData: FlClipData.all(),
                       gridData: FlGridData(
                         show: true,
                         drawVerticalLine: true,
@@ -99,12 +77,14 @@ class _SupporterMoodProgressScreenState extends State<SupporterMoodProgressScree
                             interval: 1,
                             getTitlesWidget: (value, _) {
                               int index = value.toInt();
-                              if (index < 0 || index >= days.length) return const Text('');
+                              if (index < 0 || index >= days.length)
+                                return const Text('');
                               return Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
                                   days[index],
-                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
                                 ),
                               );
                             },
@@ -116,12 +96,15 @@ class _SupporterMoodProgressScreenState extends State<SupporterMoodProgressScree
                             interval: 2,
                             getTitlesWidget: (value, _) => Text(
                               value.toInt().toString(),
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
-                        rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                        topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                        rightTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                        topTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
                       ),
                       borderData: FlBorderData(
                         show: true,

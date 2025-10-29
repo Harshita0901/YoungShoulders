@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../theme_provider.dart'; // import provider
+import '../theme_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SupporterSettingsScreen extends StatefulWidget {
@@ -11,7 +11,6 @@ class SupporterSettingsScreen extends StatefulWidget {
 }
 
 class _SupporterSettingsScreenState extends State<SupporterSettingsScreen> {
-  bool moodReminders = true;
   bool resourceUpdates = true;
   bool aiAnalysisUpdates = true;
 
@@ -42,7 +41,7 @@ class _SupporterSettingsScreenState extends State<SupporterSettingsScreen> {
                 child: Icon(Icons.person, color: Colors.white),
               ),
               title: const Text("Supporter Name"),
-              subtitle: const Text("Supporter since Jan 2025"),
+              subtitle: const Text("Supporter since Oct 2025"),
               trailing: IconButton(
                 icon: const Icon(Icons.edit),
                 onPressed: () {
@@ -59,14 +58,6 @@ class _SupporterSettingsScreenState extends State<SupporterSettingsScreen> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          SwitchListTile(
-            title: const Text("Mood Update Reminders"),
-            value: moodReminders,
-            activeColor: Colors.deepPurple,
-            onChanged: (val) {
-              setState(() => moodReminders = val);
-            },
-          ),
           SwitchListTile(
             title: const Text("New Resource Updates"),
             value: resourceUpdates,
@@ -121,7 +112,6 @@ class _SupporterSettingsScreenState extends State<SupporterSettingsScreen> {
               leading: const Icon(Icons.delete, color: Colors.red),
               title: const Text("Delete Account", style: TextStyle(color: Colors.red)),
               onTap: () {
-                // TODO: Mock delete account confirmation
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
@@ -155,10 +145,10 @@ class _SupporterSettingsScreenState extends State<SupporterSettingsScreen> {
           const SizedBox(height: 8),
           Card(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            child: ListTile(
-              leading: const Icon(Icons.info, color: Colors.deepPurple),
-              title: const Text("App Version"),
-              subtitle: const Text("v1.0.0"),
+            child: const ListTile(
+              leading: Icon(Icons.info, color: Colors.deepPurple),
+              title: Text("App Version"),
+              subtitle: Text("v1.1.0"), // ← your current app version
             ),
           ),
           Card(
@@ -188,7 +178,7 @@ class _SupporterSettingsScreenState extends State<SupporterSettingsScreen> {
             child: ElevatedButton(
               onPressed: () async {
                 final prefs = await SharedPreferences.getInstance();
-                await prefs.remove('currentUserEmail'); // only log out, don’t delete users
+                await prefs.remove('currentUserEmail');
 
                 if (context.mounted) {
                   Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);

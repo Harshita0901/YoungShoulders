@@ -42,7 +42,6 @@ class _SignupScreenState extends State<SignupScreen> {
       return;
     }
 
-    // Split name into first and last name automatically
     final nameParts = name.split(" ");
     final firstName = nameParts.first;
     final lastName = nameParts.length > 1 ? nameParts.sublist(1).join(" ") : "";
@@ -74,70 +73,147 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[50],
-      appBar: AppBar(
-        title: const Text("Sign Up"),
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: "Full Name"),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: "Email"),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: "Password"),
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    _selectedBirthDate == null
-                        ? "Select Birth Date"
-                        : "Birth Date: ${_selectedBirthDate!.toLocal().toString().split(' ')[0]}",
+      backgroundColor: const Color(0xFFF3E5F5),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            elevation: 8,
+            shadowColor: Colors.deepPurple.withOpacity(0.3),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.person_add_alt_1, size: 70, color: Colors.deepPurple),
+                  const SizedBox(height: 12),
+                  const Text(
+                    "Create Your Account",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.deepPurple,
+                    ),
                   ),
-                ),
-                TextButton(
-                  onPressed: () => _selectDate(context),
-                  child: const Text("Pick Date"),
-                ),
-              ],
-            ),
-            const SizedBox(height: 25),
-            ElevatedButton(
-              onPressed: _signup,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple,
-                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 14),
+                  const SizedBox(height: 24),
+
+                  // Full Name
+                  TextField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      labelText: "Full Name",
+                      prefixIcon: const Icon(Icons.person, color: Colors.deepPurple),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Email
+                  TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      labelText: "Email",
+                      prefixIcon: const Icon(Icons.email, color: Colors.deepPurple),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Password
+                  TextField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: "Password",
+                      prefixIcon: const Icon(Icons.lock, color: Colors.deepPurple),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Birth Date
+                  InkWell(
+                    onTap: () => _selectDate(context),
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.deepPurple.shade100),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.cake, color: Colors.deepPurple),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              _selectedBirthDate == null
+                                  ? "Select Birth Date"
+                                  : "Birth Date: ${_selectedBirthDate!.toLocal().toString().split(' ')[0]}",
+                              style: TextStyle(
+                                color: _selectedBirthDate == null
+                                    ? Colors.grey[600]
+                                    : Colors.deepPurple,
+                              ),
+                            ),
+                          ),
+                          const Icon(Icons.calendar_today, color: Colors.deepPurple),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 28),
+
+                  // Sign Up Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _signup,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        elevation: 4,
+                      ),
+                      child: const Text(
+                        "Sign Up",
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+                  const Divider(thickness: 1.2),
+                  const SizedBox(height: 10),
+
+                  // Login Link
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (_) => LoginScreen()),
+                      );
+                    },
+                    child: const Text(
+                      "Already have an account? Log in here",
+                      style: TextStyle(color: Colors.deepPurple, fontSize: 16),
+                    ),
+                  ),
+                ],
               ),
-              child: const Text(
-                "Sign Up",
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
             ),
-            const SizedBox(height: 15),
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => LoginScreen()),
-                );
-              },
-              child: const Text("Already have an account? Log in here."),
-            ),
-          ],
+          ),
         ),
       ),
     );

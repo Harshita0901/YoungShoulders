@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../models/mood_entry.dart';
-import '../models/mood_data.dart';
 import '../models/app_user.dart';
 import '../models/user_storage.dart';
 
@@ -14,20 +13,13 @@ class ProgressScreen extends StatefulWidget {
 }
 
 class _ProgressScreenState extends State<ProgressScreen> {
-  List<MoodEntry> get moodEntries => MoodData().moodEntries;
   List<String> _journalHistory = [];
   final UserStorage _storage = UserStorage();
 
   @override
   void initState() {
     super.initState();
-    _loadMoodData();
     _loadJournalHistory();
-  }
-
-  void _loadMoodData() async {
-    await MoodData().loadData();
-    setState(() {});
   }
 
   void _loadJournalHistory() async {
@@ -37,25 +29,17 @@ class _ProgressScreenState extends State<ProgressScreen> {
     });
   }
 
-  /// Build mood trend data for last 7 days
+  /// Mock mood data for the last 7 days
   List<FlSpot> _buildMoodTrend() {
-    if (moodEntries.isEmpty) return [];
-    Map<int, List<int>> dailyMoods = {};
-    DateTime now = DateTime.now();
-
-    for (var entry in moodEntries) {
-      int dayDiff = now.difference(entry.dateTime).inDays;
-      if (dayDiff < 7) {
-        dailyMoods[6 - dayDiff] = (dailyMoods[6 - dayDiff] ?? [])..add(entry.moodLevel);
-      }
-    }
-
-    return List.generate(7, (i) {
-      if (dailyMoods[i] == null || dailyMoods[i]!.isEmpty) return FlSpot(i.toDouble(), 0);
-      double avg = dailyMoods[i]!.reduce((a, b) => a + b) / dailyMoods[i]!.length;
-      avg = avg < 0 ? 0 : avg; // clamp to 0 to prevent dips below zero
-      return FlSpot(i.toDouble(), avg);
-    });
+    return [
+      FlSpot(0, 5),
+      FlSpot(1, 6),
+      FlSpot(2, 4),
+      FlSpot(3, 7),
+      FlSpot(4, 6),
+      FlSpot(5, 8),
+      FlSpot(6, 7),
+    ];
   }
 
   @override
@@ -75,8 +59,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
         children: [
           _buildMoodLineChart(days),
           const SizedBox(height: 20),
-          _buildMostCommonMoodPie(),
-          const SizedBox(height: 20),
           _buildActivityCompletion(),
           const SizedBox(height: 20),
           _buildJournalPreview(),
@@ -87,16 +69,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
   Widget _buildMoodLineChart(List<String> days) {
     final moodTrend = _buildMoodTrend();
-    if (moodTrend.isEmpty) {
-      return Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        elevation: 4,
-        child: const Padding(
-          padding: EdgeInsets.all(16),
-          child: Text('No mood data available for this week.'),
-        ),
-      );
-    }
 
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -118,9 +90,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 LineChartData(
                   minX: 0,
                   maxX: 6,
-                  minY: 0, // start y-axis at 0
+                  minY: 0,
                   maxY: 10,
-                  clipData: FlClipData.all(), // prevent dips below zero
+                  clipData: FlClipData.all(),
                   gridData: FlGridData(
                     show: true,
                     drawVerticalLine: true,
@@ -183,46 +155,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 ),
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMostCommonMoodPie() {
-    final moodCount = <String, int>{};
-    for (var e in moodEntries) {
-      moodCount[e.mood] = (moodCount[e.mood] ?? 0) + 1;
-    }
-    if (moodCount.isEmpty) return const SizedBox();
-
-    final total = moodCount.values.reduce((a, b) => a + b);
-    final sections = moodCount.entries.map((entry) {
-      final percent = (entry.value / total) * 100;
-      final color =
-          Colors.primaries[entry.key.hashCode % Colors.primaries.length].shade400;
-      return PieChartSectionData(
-        value: percent,
-        title: '${entry.key} ${(percent).toStringAsFixed(0)}%',
-        color: color,
-        radius: 60,
-        titleStyle: const TextStyle(
-            color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
-      );
-    }).toList();
-
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text("Mood Distribution",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-            const SizedBox(height: 12),
-            SizedBox(height: 200, child: PieChart(PieChartData(sections: sections))),
           ],
         ),
       ),

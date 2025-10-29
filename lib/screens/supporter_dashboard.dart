@@ -147,7 +147,7 @@ class SupporterDashboard extends StatelessWidget {
                       },
                     ),
                     FeatureTile(
-                      title: "Suggested Places",
+                      title: "Google Maps Access",
                       icon: Icons.location_on,
                       color: Colors.orange,
                       onTap: () {

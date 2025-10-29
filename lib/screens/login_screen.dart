@@ -56,20 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _continueAsGuest() {
-    final guestUser = AppUser(
-      firstName: 'Guest',
-      lastName: '',
-      email: '',
-      password: '',
-    );
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => ProfileSelectionScreen(user: guestUser)),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,25 +71,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.deepPurple,
+                  letterSpacing: 0.5,
                 ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 48),
               TextField(
                 controller: _emailController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Email',
-                  prefixIcon: Icon(Icons.email),
-                  border: OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.email, color: Colors.deepPurple),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 24),
               TextField(
                 controller: _passwordController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Password',
-                  prefixIcon: Icon(Icons.lock),
-                  border: OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.lock, color: Colors.deepPurple),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 obscureText: true,
               ),
@@ -111,9 +103,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ElevatedButton(
                 onPressed: _login,
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
                   minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-                child: const Text('Login', style: TextStyle(fontSize: 18)),
+                child: const Text('Login', style: TextStyle(fontSize: 18, color: Colors.white)),
               ),
               const SizedBox(height: 16),
               Row(
@@ -133,11 +129,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(height: 16),
-              TextButton(
-                onPressed: _continueAsGuest,
-                child: const Text('Continue as Guest'),
               ),
             ],
           ),
