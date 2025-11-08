@@ -19,7 +19,20 @@ class _AIChatScreenState extends State<AIChatScreen> with TickerProviderStateMix
   final Map<String, String> _scriptedResponses = {
     "hello": "Hello! I'm doing great 😄 How about you?",
     "rough_genz": "Ayy, I feel you bro 😅 Sometimes everything just hits all at once, and your brain’s like, “nah, I’m clocking out.” 💀 Try vibin’ with some good music — like actually throw on your favorite playlist, close your eyes, and just let it carry you for a sec. Or go take a walk, touch some grass, get that fresh air reset y’know? Even just chillin’ for a bit, zoning out, or doing something small that makes you feel human again can help. You got this fr, just breathe and take it one step at a time 🙌",
-    "rough_formal": "I understand — it can be quite challenging to manage moments like this, especially when everything feels overwhelming or mentally draining. Try taking a few minutes to focus on your breathing; slow, intentional deep breaths can help calm your nervous system and bring your attention back to the present. Journaling your thoughts is another helpful practice — sometimes simply putting your feelings into words allows you to process them more clearly and release some of the weight you’re carrying. You might also consider stepping away from your current task for a short break, even just five or ten minutes, to stretch, walk around, or sip some water. These small pauses can make a meaningful difference in helping you regain composure and clarity. Remember, it’s completely okay to prioritize your well-being — taking care of yourself isn’t a sign of weakness, but an important part of staying strong and balanced."
+    "rough_formal": "I understand — it can be quite challenging to manage moments like this, especially when everything feels overwhelming or mentally draining. Try taking a few minutes to focus on your breathing; slow, intentional deep breaths can help calm your nervous system and bring your attention back to the present. Journaling your thoughts is another helpful practice — sometimes simply putting your feelings into words allows you to process them more clearly and release some of the weight you’re carrying. You might also consider stepping away from your current task for a short break, even just five or ten minutes, to stretch, walk around, or sip some water. These small pauses can make a meaningful difference in helping you regain composure and clarity. Remember, it’s completely okay to prioritize your well-being — taking care of yourself isn’t a sign of weakness, but an important part of staying strong and balanced.",
+    "emotional_analysis":
+    "Hey, I can tell you’re feeling drained and torn between wanting relief and not wanting to make it worse. Let’s take this one step at a time:\n\n"
+        "- Try softer music instead of silence: go for gentle, ambient sounds — not lyrics-heavy or loud tracks. It gives your brain rhythm without overstimulation.\n"
+        "- Skip 'boring breathing' — try grounding instead: look around and list 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste. It resets your senses.\n"
+        "- Ease your body’s tension: drink water, loosen anything tight, and apply a cool cloth to your forehead. Physical relief can calm the heart rate naturally.\n"
+        "- Pick one small next step: text a friend, close your eyes for 2 minutes, or stretch lightly. Small actions stop the spiral of indecision.\n"
+        "- If symptoms get worse (like dizziness, chest pain, or heavy palpitations), reach out to a medical or trusted adult right away. Your body’s asking for care, not toughness.\n\n"
+        "**Emotional Evaluation (ML-style):**\n"
+        "- Your language shows high cognitive strain — phrases like “I don’t really know what to do” and “so fried” indicate decision fatigue.\n"
+        "- You’re balancing anxiety (palpitations, worry) with frustration (calling breathing “boring”) — a common emotional contradiction when someone’s emotionally exhausted.\n"
+        "- There’s hesitation rooted in control — you want something that helps but fear making symptoms worse, showing hyperawareness of physical cues.\n"
+        "- Your tone reveals low emotional bandwidth, suggesting burnout or overstimulation rather than pure panic.\n"
+        "- Emotionally, you’re not seeking solutions — you’re seeking stability. The body is signaling it’s had enough stimulation; what you need right now is gentle regulation, not productivity."
   };
 
   Future<void> _sendMessage() async {
@@ -31,7 +44,6 @@ class _AIChatScreenState extends State<AIChatScreen> with TickerProviderStateMix
       _controller.clear();
       _isLoading = true;
     });
-
 
     final randomDelay = Duration(milliseconds: 500 + Random().nextInt(1000));
     await Future.delayed(randomDelay);
@@ -45,6 +57,8 @@ class _AIChatScreenState extends State<AIChatScreen> with TickerProviderStateMix
       aiReply = _scriptedResponses["rough_genz"]!;
     } else if (lowerText.contains("well") && lowerText.contains("rough")) {
       aiReply = _scriptedResponses["rough_formal"]!;
+    } else if (lowerText.contains("palpitations") || lowerText.contains("headache") || lowerText.contains("fried")) {
+      aiReply = _scriptedResponses["emotional_analysis"]!;
     } else {
       aiReply = "Hmm… I'm having trouble generating a response. Check your wi-fi connection and get back."; // Default AI fallback
     }
@@ -89,7 +103,6 @@ class _AIChatScreenState extends State<AIChatScreen> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Gradient background
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -101,7 +114,7 @@ class _AIChatScreenState extends State<AIChatScreen> with TickerProviderStateMix
         child: SafeArea(
           child: Column(
             children: [
-              // Custom App Bar with Back Button
+              // App bar
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
@@ -120,7 +133,6 @@ class _AIChatScreenState extends State<AIChatScreen> with TickerProviderStateMix
                 ),
                 child: Row(
                   children: [
-                    // 🔙 Back Button
                     IconButton(
                       icon: const Icon(Icons.arrow_back, color: Colors.white),
                       onPressed: () => Navigator.pop(context),
@@ -137,7 +149,7 @@ class _AIChatScreenState extends State<AIChatScreen> with TickerProviderStateMix
                         ),
                       ),
                     ),
-                    const SizedBox(width: 48), // Keeps title centered
+                    const SizedBox(width: 48),
                   ],
                 ),
               ),
@@ -187,14 +199,13 @@ class _AIChatScreenState extends State<AIChatScreen> with TickerProviderStateMix
                 ),
               ),
 
-              // Typing Indicator
               if (_isLoading)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: _buildTypingIndicator(),
                 ),
 
-              // Input Box
+              // Input box
               Container(
                 margin: const EdgeInsets.all(12),
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

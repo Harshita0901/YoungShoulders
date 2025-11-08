@@ -20,7 +20,7 @@ class TeenDashboard extends StatelessWidget {
           'Welcome Back!',
           style: TextStyle(fontWeight: FontWeight.w600),
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.blue.shade700,
         elevation: 3,
         centerTitle: true,
       ),
@@ -30,34 +30,41 @@ class TeenDashboard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildGreetingCard(),
-
+            const SizedBox(height: 30),
+            // Buttons in a row for more visual interest
+            Row(
+              children: [
+                Expanded(
+                  child: _buildDashboardButton(
+                    context,
+                    icon: Icons.edit_note_rounded,
+                    label: "Quick Journal",
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => QuickJournalScreen(user: user),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _buildDashboardButton(
+                    context,
+                    icon: Icons.calendar_today_rounded,
+                    label: "Upcoming Tasks",
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => UpcomingTasksScreen(user: user),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 28),
-
-            _buildDashboardButton(
-              context,
-              icon: Icons.edit_note_rounded,
-              label: "Quick Journal",
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => QuickJournalScreen(user: user),
-                ),
-              ),
-            ),
-            _buildDashboardButton(
-              context,
-              icon: Icons.calendar_today_rounded,
-              label: "Upcoming Tasks",
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => UpcomingTasksScreen(user: user),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
+            // AI Chat Card emphasized with larger size
             _buildAIChatCard(context),
           ],
         ),
@@ -73,7 +80,7 @@ class TeenDashboard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.deepPurple.shade400, Colors.deepPurple.shade200],
+            colors: [Colors.blue.shade700, Colors.blue.shade300],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -110,26 +117,26 @@ class TeenDashboard extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
       child: Card(
-        color: Colors.deepPurple.shade50,
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        color: Colors.blue.shade50,
+        elevation: 6,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: ListTile(
           contentPadding:
-          const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           leading: CircleAvatar(
-            radius: 26,
-            backgroundColor: Colors.deepPurple,
+            radius: 30,
+            backgroundColor: Colors.blue.shade600,
             child: const Icon(Icons.smart_toy_rounded,
-                color: Colors.white, size: 26),
+                color: Colors.white, size: 30),
           ),
           title: const Text(
             'AI Chat Companion',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
           ),
           subtitle:
           const Text('Chat casually with your supportive AI buddy!'),
-          trailing: const Icon(Icons.arrow_forward_ios_rounded,
-              color: Colors.deepPurple),
+          trailing: Icon(Icons.arrow_forward_ios_rounded,
+              color: Colors.blue.shade700),
           onTap: () {
             Navigator.push(
               context,
@@ -149,21 +156,18 @@ class TeenDashboard extends StatelessWidget {
         required String label,
         required VoidCallback onTap,
       }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: ElevatedButton.icon(
-        icon: Icon(icon, size: 24),
-        label: Text(label, style: const TextStyle(fontSize: 16)),
-        onPressed: onTap,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.deepPurple.shade400,
-          foregroundColor: Colors.white,
-          minimumSize: const Size(double.infinity, 54),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14)),
-          shadowColor: Colors.deepPurple.shade200,
-          elevation: 5,
-        ),
+    return ElevatedButton.icon(
+      icon: Icon(icon, size: 26),
+      label: Text(label, style: const TextStyle(fontSize: 16)),
+      onPressed: onTap,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.blue.shade600,
+        foregroundColor: Colors.white,
+        minimumSize: const Size(double.infinity, 60),
+        shape:
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shadowColor: Colors.blue.shade200,
+        elevation: 6,
       ),
     );
   }

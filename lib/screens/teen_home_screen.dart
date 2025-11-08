@@ -32,7 +32,7 @@ class _TeenHomeScreenState extends State<TeenHomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.blue.shade700,
         title: Text("Hi, ${widget.user.firstName} 👋"),
       ),
       body: _screens[_currentIndex],

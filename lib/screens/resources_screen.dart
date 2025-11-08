@@ -78,7 +78,7 @@ class ResourcesScreen extends StatelessWidget {
           'Resources 💼',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.blue.shade700,
         elevation: 0,
       ),
       body: Column(

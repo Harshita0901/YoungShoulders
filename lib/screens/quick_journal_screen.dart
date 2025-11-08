@@ -28,7 +28,6 @@ class _QuickJournalScreenState extends State<QuickJournalScreen> {
 
     final entry = "$q1\n$q2";
 
-    // Save entry using UserStorage for this specific user
     await UserStorage().saveJournalEntry(entry, user: widget.user);
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -48,18 +47,18 @@ class _QuickJournalScreenState extends State<QuickJournalScreen> {
   @override
   Widget build(BuildContext context) {
     final gradientColors = [
-      Colors.deepPurple.shade400,
-      Colors.deepPurple.shade100,
+      Colors.blue.shade400,
+      Colors.blue.shade100,
     ];
 
     return Scaffold(
-      backgroundColor: Colors.deepPurple.shade50,
+      backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
         title: const Text(
           "Quick Journal ✍️",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.blue,
         elevation: 0,
       ),
       body: Container(
@@ -79,13 +78,13 @@ class _QuickJournalScreenState extends State<QuickJournalScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 gradient: LinearGradient(
-                  colors: [Colors.deepPurple.shade300, Colors.deepPurple.shade100],
+                  colors: [Colors.blue.shade300, Colors.blue.shade100],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.deepPurple.withOpacity(0.25),
+                    color: Colors.blue.withOpacity(0.25),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -111,7 +110,7 @@ class _QuickJournalScreenState extends State<QuickJournalScreen> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.deepPurple.withOpacity(0.08),
+                    color: Colors.blue.withOpacity(0.08),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -155,7 +154,7 @@ class _QuickJournalScreenState extends State<QuickJournalScreen> {
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple.shade400,
+                backgroundColor: Colors.blue.shade400,
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
@@ -180,7 +179,7 @@ class _QuickJournalScreenState extends State<QuickJournalScreen> {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.deepPurple.withOpacity(0.08),
+            color: Colors.blue.withOpacity(0.08),
             blurRadius: 6,
             offset: const Offset(0, 4),
           ),

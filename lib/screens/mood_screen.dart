@@ -51,7 +51,6 @@ class _MoodScreenState extends State<MoodScreen> {
       return;
     }
 
-    // Map each mood to a numeric level
     int moodLevel;
     switch (selectedMood) {
       case 'Overwhelmed':
@@ -90,7 +89,7 @@ class _MoodScreenState extends State<MoodScreen> {
 
     final newMood = MoodEntry(
       mood: selectedMood!,
-      moodLevel: moodLevel, // ✅ added this line
+      moodLevel: moodLevel,
       dateTime: DateTime.now(),
       triggers: selectedTriggers,
       journal: journalText,
@@ -110,7 +109,6 @@ class _MoodScreenState extends State<MoodScreen> {
     );
   }
 
-
   String _getAffirmation() {
     final affirmations = [
       "Take a deep breath. You’re exactly where you need to be.",
@@ -123,13 +121,13 @@ class _MoodScreenState extends State<MoodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple.shade50,
+      backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.deepPurple,
-        title: Text(
-          "How are you feeling? 🌈",
-          style: const TextStyle(fontWeight: FontWeight.bold),
+        backgroundColor: Colors.blue.shade700,
+        title: const Text(
+          "How are you feeling? 💙",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -145,7 +143,7 @@ class _MoodScreenState extends State<MoodScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 gradient: LinearGradient(
-                  colors: [Colors.deepPurple.shade300, Colors.deepPurple.shade100],
+                  colors: [Colors.blue.shade400, Colors.blue.shade200],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -183,7 +181,7 @@ class _MoodScreenState extends State<MoodScreen> {
                   selected: isSelected,
                   onSelected: (_) => setState(() => selectedMood = m['label']),
                   backgroundColor: Colors.white,
-                  selectedColor: Colors.deepPurple.shade400,
+                  selectedColor: Colors.blue.shade400,
                   labelStyle: TextStyle(
                     color: isSelected ? Colors.white : Colors.black87,
                     fontWeight: FontWeight.w500,
@@ -211,7 +209,7 @@ class _MoodScreenState extends State<MoodScreen> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.deepPurple.withOpacity(0.1),
+                  color: Colors.blue.withOpacity(0.1),
                   blurRadius: 6,
                   offset: const Offset(0, 4),
                 ),
@@ -246,7 +244,7 @@ class _MoodScreenState extends State<MoodScreen> {
                 selected: isSelected,
                 onSelected: (_) => _toggleTrigger(trigger),
                 backgroundColor: Colors.white,
-                selectedColor: Colors.deepPurple.shade400,
+                selectedColor: Colors.blue.shade400,
                 labelStyle: TextStyle(
                   color: isSelected ? Colors.white : Colors.black87,
                 ),
@@ -270,7 +268,7 @@ class _MoodScreenState extends State<MoodScreen> {
             ),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14),
-              backgroundColor: Colors.deepPurple,
+              backgroundColor: Colors.blue.shade500,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(14),
               ),

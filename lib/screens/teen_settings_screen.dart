@@ -116,7 +116,7 @@ Developed: October 2025
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.blue.shade700,
         centerTitle: true,
         elevation: 2,
       ),

@@ -51,7 +51,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
       appBar: AppBar(
         title: const Text('Your Emotional Trends',
             style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 0.5)),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.blue.shade700,
         centerTitle: true,
       ),
       body: ListView(
