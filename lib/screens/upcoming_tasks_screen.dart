@@ -288,3 +288,4 @@ class _UpcomingTasksScreenState extends State<UpcomingTasksScreen> {
     );
   }
 }
+

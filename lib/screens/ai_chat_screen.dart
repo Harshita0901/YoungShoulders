@@ -246,3 +246,4 @@ class _AIChatScreenState extends State<AIChatScreen> with TickerProviderStateMix
     );
   }
 }
+

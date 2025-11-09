@@ -111,3 +111,4 @@ class SupporterSymptomResultScreen extends StatelessWidget {
     );
   }
 }
+

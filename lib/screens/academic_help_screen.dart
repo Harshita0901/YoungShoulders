@@ -146,3 +146,4 @@ class AcademicHelpScreen extends StatelessWidget {
     );
   }
 }
+

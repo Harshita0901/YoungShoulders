@@ -199,3 +199,4 @@ class _QuickJournalScreenState extends State<QuickJournalScreen> {
     );
   }
 }
+

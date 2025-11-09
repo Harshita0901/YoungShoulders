@@ -184,3 +184,4 @@ class SupporterMoodTrackerScreen extends StatelessWidget {
     );
   }
 }
+

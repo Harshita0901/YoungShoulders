@@ -13,3 +13,4 @@ class MoodEntry {
     this.journal = '',
   }) : dateTime = dateTime ?? DateTime.now();
 }
+

@@ -137,3 +137,4 @@ class SupporterResearchArticlesScreen extends StatelessWidget {
     );
   }
 }
+

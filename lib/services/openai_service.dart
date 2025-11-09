@@ -63,3 +63,4 @@ class OpenAIService {
     return message.trim();
   }
 }
+

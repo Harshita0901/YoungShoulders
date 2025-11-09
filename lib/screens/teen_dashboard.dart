@@ -182,3 +182,4 @@ class TeenDashboard extends StatelessWidget {
     return affirmations[DateTime.now().day % affirmations.length];
   }
 }
+

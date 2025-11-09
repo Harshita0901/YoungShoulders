@@ -127,3 +127,4 @@ class ScholarshipsScreen extends StatelessWidget {
     );
   }
 }
+

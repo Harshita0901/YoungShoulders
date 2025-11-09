@@ -133,3 +133,4 @@ class _SupporterSymptomsScreenState extends State<SupporterSymptomsScreen> {
     );
   }
 }
+

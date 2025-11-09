@@ -127,3 +127,4 @@ class TechniqueCard extends StatelessWidget {
     );
   }
 }
+

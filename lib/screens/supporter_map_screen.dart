@@ -34,3 +34,4 @@ class _SupporterMapScreenState extends State<SupporterMapScreen> {
     );
   }
 }
+
